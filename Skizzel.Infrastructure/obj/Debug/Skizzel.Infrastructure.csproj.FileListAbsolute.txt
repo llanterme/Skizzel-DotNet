@@ -1,0 +1,10 @@
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\Skizzel.Infrastructure.dll.config
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\Skizzel.Infrastructure.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\Skizzel.Infrastructure.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\obj\Debug\Skizzel.Infrastructure.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\obj\Debug\Skizzel.Infrastructure.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Infrastructure\obj\Debug\Skizzel.Infrastructure.csprojResolveAssemblyReference.cache

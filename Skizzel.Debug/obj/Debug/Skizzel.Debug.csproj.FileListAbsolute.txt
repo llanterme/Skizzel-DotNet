@@ -1,0 +1,10 @@
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\Skizzel.Debug.exe.config
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\Skizzel.Debug.exe
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\Skizzel.Debug.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\Skizzel.Infrastructure.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\EntityFramework.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\Skizzel.Infrastructure.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\bin\Debug\EntityFramework.xml
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\obj\Debug\Skizzel.Debug.csprojResolveAssemblyReference.cache
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\obj\Debug\Skizzel.Debug.exe
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Debug\obj\Debug\Skizzel.Debug.pdb

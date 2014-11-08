@@ -1,0 +1,11 @@
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\obj\Debug\Skizzel.Domain.csprojResolveAssemblyReference.cache
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\Skizzel.Domain.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\Skizzel.Domain.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\log4net.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\Mweb.Foundation.Practices.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\Skizzel.Infrastructure.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\EntityFramework.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\Skizzel.Infrastructure.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\bin\Debug\EntityFramework.xml
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\obj\Debug\Skizzel.Domain.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Domain\obj\Debug\Skizzel.Domain.pdb

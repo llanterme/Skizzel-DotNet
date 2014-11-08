@@ -1,0 +1,16 @@
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Service.dll.config
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Service.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Service.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\EntityFramework.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Domain.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Mweb.Foundation.Practices.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Infrastructure.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\log4net.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Domain.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\EntityFramework.xml
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\EntityFramework.SqlServer.xml
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\bin\Skizzel.Infrastructure.pdb
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\obj\Debug\Skizzel.Service.csprojResolveAssemblyReference.cache
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\obj\Debug\Skizzel.Service.dll
+C:\Users\admin\documents\visual studio 2013\Projects\Skizzel\Skizzel.Service\obj\Debug\Skizzel.Service.pdb
