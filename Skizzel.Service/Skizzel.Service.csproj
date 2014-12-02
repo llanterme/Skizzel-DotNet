@@ -81,6 +81,10 @@
       <DependentUpon>RestService.svc</DependentUpon>
     </Compile>
     <Compile Include="Wrappers\AbstractResponse.cs" />
+    <Compile Include="Wrappers\AuthenticateResponse.cs" />
+    <Compile Include="Wrappers\CreateCategoryResponse.cs" />
+    <Compile Include="Wrappers\MillageOverviewResponse.cs" />
+    <Compile Include="Wrappers\ReceiptOverviewResponse.cs" />
     <Compile Include="Wrappers\User.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,6 @@ namespace Skizzel.Domain.Entities
         public string Password { get; set; }
         public string Name { get; set; }
         public List<ReceiptEntity> ReceiptList { get; set; }
-        public List<CategoryEntity> CategoriesList { get; set; }
         public List<MillageEntity> MillageList { get; set; } 
     }
 }

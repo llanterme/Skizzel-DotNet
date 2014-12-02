@@ -114,6 +114,47 @@ namespace Skizzel.Domain.Logic
    return 0;
   }
 
+  public List<CategoryEntity> CreateCategory(CategoryEntity newCategory)
+  {
+   string methodName = MethodBase.GetCurrentMethod().Name;
+   try
+   {
+    using (var uow = new Uow<Category>())
+    {
+    
+     var categories = (from allCategories in uow.Repository.Find(a => a.Type == newCategory.Category)
+      select allCategories);
+
+     if (!categories.Any())
+     {
+
+      uow.Repository.Insert(new Category
+      {
+       Type = newCategory.Category,
+       UserId = newCategory.UserId
+      });
+
+      uow.Save();
+
+      return GetUserCategories(newCategory.UserId);
+
+
+     }
+     else
+     {
+      return GetUserCategories(newCategory.UserId);
+     }
+    
+    }
+   }
+   catch (Exception ex)
+   {
+    Log.Info(methodName, string.Format("CreateUser Exception Occured: {0}", ex.Message));
+   }
+
+   return null;
+  }
+
   public int AuthenticateUser(UserEntity user)
   {
    string methodName = MethodBase.GetCurrentMethod().Name;
@@ -128,6 +169,7 @@ namespace Skizzel.Domain.Logic
 
      if (userQuery != null)
      {
+
       return GetUserId(userQuery.Email);
      }
     }
@@ -139,30 +181,6 @@ namespace Skizzel.Domain.Logic
    }
 
    return 0;
-  }
-
-  public UserEntity GetUserOverview(int userId, string receiptMonth)
-  {
-
-   var dateParts = receiptMonth.Split('_');
-   var filterMonth = dateParts[0] + " " + dateParts[1];
-   using (var uow = new Uow<User>())
-   {
-    var userQuery = (from allUsers in uow.Repository.Find(a => a.UserId == userId)
-                     select allUsers).Single();
-
-    return new UserEntity
-    {
-     Email = userQuery.Email,
-     Password = userQuery.Password,
-     ReceiptList = GetReceiptList(userQuery.Receipts, filterMonth),
-     Name = userQuery.Name,
-     CategoriesList = GetUserCategories(userId),
-     MillageList = GetMillageList(userQuery.Millages, filterMonth)
-     
-
-    };
-   }
   }
 
   public List<UserMonthsEntity> GetUserMonths(int userId)
@@ -237,26 +255,8 @@ namespace Skizzel.Domain.Logic
 
    return 0;
   }
-  
-  private int GetUsersMonthCount(int userId, string filterMonth)
-  {
-   using (var uow = new Uow<Receipt>())
-   {
-    return (from allMonths in uow.Repository.Find(a => a.UserId == userId && a.FilterDate == filterMonth)
-            select allMonths).Count();
-   }
-  }
 
-  private int GetUsersMonthMillageCount(int userId, string filterMonth)
-  {
-   using (var uow = new Uow<Millage>())
-   {
-    return (from allMonths in uow.Repository.Find(a => a.UserId == userId && a.FilterDate == filterMonth)
-            select allMonths).Count();
-   }
-  }
-
-  private List<CategoryEntity> GetUserCategories(int userId)
+  public List<CategoryEntity> GetUserCategories(int userId)
   {
    var userCategoryList = new List<CategoryEntity>();
    using (var uow = new Uow<Category>())
@@ -278,6 +278,124 @@ namespace Skizzel.Domain.Logic
    return userCategoryList;
   }
 
+  public  List<MillageEntity> GetMillageOverview(int userId, string millageMonth)
+  {
+
+   var dateParts = millageMonth.Split('_');
+   var filterMonth = dateParts[0] + " " + dateParts[1];
+
+   using (var uow = new Uow<Millage>())
+   {
+    var millageQuery = (from receipts in uow.Repository.Find(a => a.UserId == userId && a.FilterDate == filterMonth)
+                        select receipts);
+  
+
+   return millageQuery.Select(item => new MillageEntity
+   {
+    StartLat = item.StartLat,
+    StartLong = item.StartLong,
+    StopLat = item.StopLat,
+    StopLong = item.StartLong,
+    CategoryId = item.CategoryId,
+    MillageId = item.MillageId,
+    UserId = item.UserId,
+    Alias = item.Alias,
+    DateCreated = item.DateCreated,
+    FilterDate = item.FilterDate,
+    Total = Math.Round(double.Parse(item.Total),4),
+    Category = item.Category.Type
+    
+   }).ToList();
+   }
+  }
+
+  public List<ReceiptEntity> GetReceiptOverView(int userId, string receiptMonth, int categoryId)
+  {
+
+   var dateParts = receiptMonth.Split('_');
+   var filterMonth = dateParts[0] + " " + dateParts[1];
+
+   using (var uow = new Uow<Receipt>())
+   {
+    var receiptQuery = (from receipts in uow.Repository.Find(a => a.UserId == userId && a.FilterDate == filterMonth && a.CategoryId == categoryId)
+     select receipts);
+
+
+    return receiptQuery.Select(item => new ReceiptEntity
+    {
+     Alias = item.Alias,
+     CategoryId = item.CategoryId,
+     Category = item.Category.Type,
+     DateCreated = item.DateCreated,
+     ReceiptId = item.ReceiptId,
+     UserId = item.UserId,
+     ReceiptImagesList = GetImageList(item.Images)
+    }).ToList();
+   }
+  }
+
+  public List<ReceiptCategoryEntity> GetUsersReceiptCategory(int userId, string receiptMonth)
+  {
+   var dateParts = receiptMonth.Split('_');
+   var filterMonth = dateParts[0] + " " + dateParts[1];
+
+   using (var uow = new Uow<Receipt>())
+   {
+    var receiptCategoryQuery = (from categories in
+     uow.Repository.Get().Where(a => a.UserId == userId && a.FilterDate == filterMonth)
+     select categories).GroupBy(p => p.CategoryId).Select(g => g.First());
+
+    var receiptCategoryList = new List<ReceiptCategoryEntity>();
+    foreach (var cat in receiptCategoryQuery)
+    {
+      receiptCategoryList.Add(new ReceiptCategoryEntity
+      {
+        ReceiptCategory = cat.Category.Type,
+        CategoryCount = GetUserReceiptCategoryCount(userId,cat.CategoryId, filterMonth),
+        CategoryId = cat.CategoryId
+      });
+    }
+
+    return receiptCategoryList;
+   }
+
+  }
+
+  private static List<ImageEntity> GetImageList(IEnumerable<Image> images)
+  {
+   return images.Select(image => new ImageEntity
+   {
+    ImageId = image.ImageId, ReceiptId = image.ReceiptId, ImageUrl = ConfigurationManager.AppSettings["ImageURL"] + image.ImageUrl
+   }).ToList();
+  }
+
+  private int GetUsersMonthCount(int userId, string filterMonth)
+  {
+   using (var uow = new Uow<Receipt>())
+   {
+    return (from allMonths in uow.Repository.Find(a => a.UserId == userId && a.FilterDate == filterMonth)
+            select allMonths).Count();
+   }
+  }
+
+  private int GetUserReceiptCategoryCount(int userId, int categoryId, string filterMonth)
+  {
+   using (var uow = new Uow<Receipt>())
+   {
+    return (from allCats in uow.Repository.Find(a => a.UserId == userId && a.CategoryId == categoryId && a.FilterDate == filterMonth)
+            select allCats).Count();
+   }
+  }
+
+  private int GetUsersMonthMillageCount(int userId, string filterMonth)
+  {
+   using (var uow = new Uow<Millage>())
+   {
+    return (from allMonths in uow.Repository.Find(a => a.UserId == userId && a.FilterDate == filterMonth)
+            select allMonths).Count();
+   }
+  }
+
   private int GetUserId(string email)
   {
    try
@@ -293,50 +411,6 @@ namespace Skizzel.Domain.Logic
 
     throw;
    }
-  }
-
-  private static List<MillageEntity> GetMillageList(IEnumerable<Millage> millages, string filterMonth)
-  {
-
-   var filterMillagesQuery = (from allMillages in millages.Where(a => a.FilterDate == filterMonth)
-                             select allMillages);
-
-   return filterMillagesQuery.Select(item => new MillageEntity
-   {
-    StartLat = item.StartLat,
-    StartLong = item.StartLong,
-    StopLat = item.StopLat,
-    StopLong = item.StartLong,
-    CategoryId = item.CategoryId,
-    MillageId = item.MillageId,
-    UserId = item.UserId,
-    Alias = item.Alias,
-    DateCreated = item.DateCreated,
-    FilterDate = item.FilterDate,
-    Total = double.Parse(item.Total)
-    
-   }).ToList();
-  } 
-
-  private static List<ReceiptEntity> GetReceiptList(IEnumerable<Receipt> receipts, string filterMonth)
-  {
-
-   var filterReceiptQuery = (from allReceipts in receipts.Where(a => a.FilterDate == filterMonth)
-    select allReceipts);
-
-
-   return filterReceiptQuery.Select(item => new ReceiptEntity
-   {
-    Alias = item.Alias, CategoryId = item.CategoryId, Category = item.Category.Type ,DateCreated = item.DateCreated, ReceiptId = item.ReceiptId, UserId = item.UserId, ReceiptImagesList = GetImageList(item.Images)
-   }).ToList();
-  }
-
-  private static List<ImageEntity> GetImageList(IEnumerable<Image> images)
-  {
-   return images.Select(image => new ImageEntity
-   {
-    ImageId = image.ImageId, ReceiptId = image.ReceiptId, ImageUrl = ConfigurationManager.AppSettings["ImageURL"] + image.ImageUrl
-   }).ToList();
   }
  }
 }

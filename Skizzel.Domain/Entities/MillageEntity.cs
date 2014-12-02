@@ -19,5 +19,6 @@ namespace Skizzel.Domain.Entities
   public string StopLat { get; set; }
   public string StopLong { get; set; }
   public Double Total { get; set; }
+  public string Category { get; set; }
  }
 }

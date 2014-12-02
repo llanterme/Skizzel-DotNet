@@ -17,14 +17,15 @@ namespace Skizzel.Service
  {
   private readonly CoreLogic _manager = new CoreLogic();
 
-  public User GetUserOverview(string userId, string receiptMonth)
+  public ReceiptOverviewResponse GetReceiptOverview(string userId, string receiptMonth, string categoryId)
   {
-   var userOverview = _manager.GetUserOverview(int.Parse(userId), receiptMonth);
-   if (userOverview != null)
+   var receiptOverView = _manager.GetReceiptOverView(int.Parse(userId), receiptMonth, int.Parse(categoryId));
+
+   if (receiptOverView != null)
    {
-    return new User
+    return new ReceiptOverviewResponse
     {
-     UserOverView = userOverview,
+     ReceiptList = receiptOverView,
      Message = "success",
      Status = "success"
 
@@ -33,20 +34,38 @@ namespace Skizzel.Service
    return null;
   }
 
-  public AbstractResponse AuthenticateUser(UserEntity user)
+  public MillageOverviewResponse GetMillageOvreview(string userId, string receiptMonth)
+  {
+   var milageOverview = _manager.GetMillageOverview(int.Parse(userId), receiptMonth);
+
+   if (milageOverview != null)
+   {
+    return new MillageOverviewResponse
+    {
+     MillageList = milageOverview,
+     Message = "success",
+     Status = "success"
+
+    };
+   }
+   return null;
+  }
+
+  public AuthenticateResponse AuthenticateUser(UserEntity user)
   {
    var authenticateUser = _manager.AuthenticateUser(user);
 
    if (authenticateUser != 0)
    {
-    return new AbstractResponse
+    return new AuthenticateResponse
     {
      Message = authenticateUser.ToString(CultureInfo.InvariantCulture),
-     Status = "success"
+     Status = "success",
+     UserCategories = _manager.GetUserCategories(authenticateUser)
     };
    }
 
-   return new AbstractResponse
+   return new AuthenticateResponse
    {
     Message = "denied",
     Status = "denied"
@@ -74,6 +93,11 @@ namespace Skizzel.Service
 
   }
 
+  public List<ReceiptCategoryEntity> GetUsersReceiptCategoryCount(string userId, string receiptMonth)
+  {
+   return _manager.GetUsersReceiptCategory(int.Parse(userId), receiptMonth);
+  }
+
   public AbstractResponse CreateMillage(MillageEntity millage)
   {
    var newMillage = _manager.CreateMillage(millage);
@@ -95,6 +119,28 @@ namespace Skizzel.Service
 
   }
 
+  public CreateCategoryResponse CreateCategory(CategoryEntity category)
+  {
+   var categoriesList = _manager.CreateCategory(category);
+
+   if (categoriesList != null)
+   {
+    return new CreateCategoryResponse
+    {
+     Message = "success",
+     Status = "success",
+     UserCategories = categoriesList
+     
+    };
+   }
+
+   return new CreateCategoryResponse
+   {
+    Message = "failed",
+    Status = "failed",
+    UserCategories = null
+   };
+  }
 
   public List<UserMonthsEntity> GetUserMillageDates(string userId)
   {

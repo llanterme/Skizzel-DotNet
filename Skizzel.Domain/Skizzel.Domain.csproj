@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AuthenticationEntity.cs" />
     <Compile Include="Entities\CategoryEntity.cs" />
     <Compile Include="Entities\ImageEntity.cs" />
     <Compile Include="Entities\MillageEntity.cs" />
+    <Compile Include="Entities\ReceiptCategoryEntity.cs" />
     <Compile Include="Entities\RecepitEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Entities\UserMonthsEntity.cs" />
